@@ -10,12 +10,10 @@ $ sudo get-shit-done work
 $ sudo get-shit-done procrastinate
 
 ### Add sites to block-list
-You can add more sites to the blocked manually by adding it in ~/.config/get-shit-done.ini
-Duplicates will be removed, and www is automatically prepended.
+You can add more sites to the blocked sites list by manually by adding it in ~/.config/get-shit-done.ini. Duplicates will be removed, and www is automatically prepended.
 For eg. sites = foo.com, bar.com, baz.com
 
-* $siteList
-Add or remove elements of this array for sites to block or unblock.
+* $siteList - Add or remove elements of this array for sites to block or unblock.
 
 
 ### Source
