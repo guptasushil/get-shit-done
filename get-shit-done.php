@@ -12,20 +12,12 @@ if ( 'root' != strtolower($whoami) ) {
 
 $homedir = trim(`cd ~ && pwd`);
 $iniLocal = $homedir.'/.config/get-shit-done.ini';
+
 $iniGlobal = __DIR__ . '/sites.ini';
 
 $uname = trim(`uname`);
 
-if ( $uname == 'Linux' ) {
-    $restartNetworkingCommand = '/etc/init.d/networking restart';
-} elseif ( $uname == 'Darwin' ) {
-    $restartNetworkingCommand = 'dscacheutil -flushcache';
-} else {
-    $message = '"Please contribute DNS cache flush command on GitHub."';
-    $restartNetworkingCommand = "echo $message";
-    # Intention isn't to exit, as it still works, but just requires some
-    # intervention on the user's part.
-}
+$restartNetworkingCommand = '/etc/init.d/networking restart';
 
 $hostsFile = '/etc/hosts';
 $startToken = '## start-gsd';
@@ -34,7 +26,7 @@ $siteList = iniToArray($iniGlobal);
 
 if (file_exists($iniLocal)) {
   $siteList = (array_merge($siteList, iniToArray($iniLocal)));
-}
+} 
 
 $action = $argv[1];
 
@@ -42,7 +34,8 @@ switch ( $action ) {
   case 'work': {
     $contents = file_get_contents($hostsFile);
     if($contents && strpos($contents, $startToken) !== false && strpos($contents, $endToken) !== false) {
-      exitWithError("Work mode already set.");
+	shell_exec('/etc/init.d/dns-clean start'); 
+	exitWithError("Work mode already set. DNS has been flushed.");
     }
 
     $fh = fopen($hostsFile, 'a');
@@ -64,7 +57,7 @@ switch ( $action ) {
     break;
   }
 
-  case 'play': {
+  case 'procrastinate': {
     $hostContents = file($hostsFile);
     if ( false === $hostContents ) {
       exitWithError("Failed to open the hosts file.");
@@ -87,7 +80,7 @@ switch ( $action ) {
   }
 
   default: {
-    exitWithError("usage: " . $argv[0] . " [work | play]");
+    exitWithError("usage: " . $argv[0] . " [work | procrastinate]");
   }
 }
 
