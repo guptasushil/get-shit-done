@@ -15,6 +15,5 @@ For eg. sites = foo.com, bar.com, baz.com
 
 * $siteList - Add or remove elements of this array for sites to block or unblock.
 
-
-### Source
+## Source
 Forked from https://github.com/leftnode/get-shit-done
