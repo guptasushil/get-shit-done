@@ -11,12 +11,14 @@ $ sudo get-shit-done work
 ## To procrastinate
 $ sudo get-shit-done procrastinate
 
-### $siteList
-Add or remove elements of this array for sites to block or unblock.
+### Add sites to block-list
+You can add more sites to the blocked manually by adding it in ~/.config/get-shit-done.ini
+Duplicates will be removed, and www is automatically prepended.
+For eg. sites = foo.com, bar.com, baz.com
 
-### ~/.config/get-shit-done.ini
-Appends additional sites to block.  Duplicates will be removed, and www is prepended.
-sites = foo.com, bar.com, baz.com
+* $siteList
+- Add or remove elements of this array for sites to block or unblock.
 
-### Forked from leftnode/get-shit-done
-http://github.com/leftnode/get-shit-done
+
+### Source
+Forked from https://github.com/leftnode/get-shit-done
