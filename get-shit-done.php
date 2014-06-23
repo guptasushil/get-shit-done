@@ -2,7 +2,7 @@
 <?php
 
 if ( 1 == $argc ) {
-  exitWithError("usage: " . $argv[0] . " [work | play]");
+  exitWithError("usage: " . $argv[0] . " [work | procrastinate]");
 }
 
 $whoami = trim(`whoami`);
@@ -16,8 +16,6 @@ $iniLocal = $homedir.'/.config/get-shit-done.ini';
 $iniGlobal = __DIR__ . '/sites.ini';
 
 $uname = trim(`uname`);
-
-$restartNetworkingCommand = '/etc/init.d/networking restart';
 
 $hostsFile = '/etc/hosts';
 $startToken = '## start-gsd';
@@ -52,8 +50,6 @@ switch ( $action ) {
 
     fclose($fh);
 
-    shell_exec($restartNetworkingCommand);
-
     break;
   }
 
@@ -73,7 +69,6 @@ switch ( $action ) {
     if ( $startIndex > -1 ) {
       $hostContents = array_slice($hostContents, 0, $startIndex);
       file_put_contents($hostsFile, $hostContents);
-      shell_exec($restartNetworkingCommand);
     }
 
     break;
