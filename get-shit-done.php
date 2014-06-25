@@ -32,8 +32,7 @@ switch ( $action ) {
   case 'work': {
     $contents = file_get_contents($hostsFile);
     if($contents && strpos($contents, $startToken) !== false && strpos($contents, $endToken) !== false) {
-	shell_exec('/etc/init.d/dns-clean start'); 
-	exitWithError("Work mode already set. DNS has been flushed.");
+	exitWithError("Work mode already set.");
     }
 
     $fh = fopen($hostsFile, 'a');
